@@ -1,0 +1,138 @@
+﻿@{
+    ViewData["Title"] = "Upload Files";
+}
+
+<!doctype html>
+<html>
+    <head>
+        <style>
+            .box {
+                max-width: 800px;
+                margin: auto;
+                padding: 30px;
+                border: 1px solid #eee;
+                box-shadow: 0 0 10px rgba(0, 0, 0, .15);
+                font-size: 16px;
+                line-height: 24px;
+                font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
+                color: #555;
+            }
+
+            .error-box {
+                max-width: 800px;
+                margin: 10px auto;
+                padding: 30px;
+                border: 1px solid red;
+                box-shadow: 0 0 10px rgba(0, 0, 0, .15);
+                font-size: 16px;
+                line-height: 24px;
+                font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
+                color: darkred;
+            }
+
+            .file-input-container {
+                display: grid;
+                gap: 0.375rem; 
+                align-items: center;
+            }
+
+            .file-input-label {
+                font-size: 0.875rem;
+                color: #9ca3af; 
+                font-weight: 500; 
+                line-height: 1.25; 
+                cursor: not-allowed; 
+                opacity: 0.7; 
+            }
+
+            .file-input {
+                display: flex;
+                height: 2.5rem; 
+                width: 100%;
+                border-radius: 0.375rem; 
+                border: 1px solid #d1d5db; 
+                background-color: white; 
+                padding: 0.5rem 0.75rem; 
+                font-size: 0.875rem; 
+                color: #9ca3af; 
+                cursor: pointer;
+            }
+
+            .file-input::-webkit-file-upload-button {
+                border: none; 
+                background: transparent; 
+                color: #4b5563; 
+                font-size: 0.875rem; 
+                font-weight: 500; 
+                cursor: pointer;
+            }
+
+        .button-24 {
+            margin: 10px auto;
+            background: #FF4742;
+            border: 1px solid #FF4742;
+            border-radius: 6px;
+            box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
+            box-sizing: border-box;
+            color: #FFFFFF;
+            cursor: pointer;
+            display: inline-block;
+            font-family: nunito,roboto,proxima-nova,"proxima nova",sans-serif;
+            font-size: 16px;
+            font-weight: 800;
+            line-height: 16px;
+            min-height: 40px;
+            outline: 0;
+            padding: 12px 14px;
+            text-align: center;
+            text-rendering: geometricprecision;
+            text-transform: none;
+            user-select: none;
+            -webkit-user-select: none;
+            touch-action: manipulation;
+            vertical-align: middle;
+        }
+
+            .button-24:hover,
+            .button-24:active {
+                background-color: initial;
+                background-position: 0 0;
+                color: #FF4742;
+            }
+
+            .button-24:active {
+                opacity: .5;
+           
+        </style>
+    </head>
+    <body>
+        <div class="box">
+            <h1>Generator faktur</h1>
+
+            <form method="post" enctype="multipart/form-data" asp-action="GenerateInvoice">
+                <div class="file-input-container">
+                    <label for="orderFile" class="file-input-label">Order File</label>
+                    <input type="file" id="orderFile" name="orderFile" accept=".xml" class="file-input" />
+                </div>
+                <div class="file-input-container">
+                    <label for="priceFile" class="file-input-label">Price File</label>
+                    <input type="file" id="priceFile" name="priceFile" accept=".xml" class="file-input" />
+                </div>
+                <button class="button-24" type="submit">Wygeneruj fakturę</button>
+            </form>
+        </div>
+
+        @if (!ViewData.ModelState.IsValid)
+        {
+        <div class="error-box">
+                @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+                {
+                    <p>@error.ErrorMessage</p>
+                }
+            </div>
+        }
+        
+    </body>
+</html>
+
+

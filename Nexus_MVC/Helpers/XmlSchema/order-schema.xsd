@@ -1,0 +1,36 @@
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="zamowienie">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="zamawiajacy">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element type="xs:string" name="nazwa"/>
+              <xs:element type="xs:string" name="adres"/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="dostawca">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element type="xs:string" name="nazwa"/>
+              <xs:element type="xs:string" name="adres"/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="pozycja" maxOccurs="unbounded" minOccurs="0">
+          <xs:complexType>
+            <xs:simpleContent>
+              <xs:extension base="xs:string">
+                <xs:attribute type="xs:integer" name="id" use="required"/>
+                <xs:attribute type="xs:string" name="nazwa" use="required"/>
+                <xs:attribute type="xs:integer" name="lp" use="required"/>
+                <xs:attribute type="xs:integer" name="sztuk" use="required"/>
+              </xs:extension>
+            </xs:simpleContent>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
