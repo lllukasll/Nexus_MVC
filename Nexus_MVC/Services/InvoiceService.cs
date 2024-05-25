@@ -37,7 +37,10 @@ namespace Nexus_MVC.Services
                 Supplier = order.Supplier,
                 Customer = order.Customer,
                 Items = new List<InvoiceItem>(),
-                Podsumowanie = 0
+                Summary = new Summary
+                {
+                    Total = 0
+                }
             };
 
             foreach (var item in order.Items)
@@ -51,7 +54,7 @@ namespace Nexus_MVC.Services
                 var invoiceItem = new InvoiceItem
                 {
                     Lp = item.Lp,
-                    Id = item.Id,
+                    Id = item.Id.ToString(),
 					Name = item.Name,
 					NettoPrice = price.NettoPrice,
 					Count = item.Count,
@@ -60,11 +63,29 @@ namespace Nexus_MVC.Services
                 };
 
                 invoice.Items.Add(invoiceItem);
-                invoice.Podsumowanie += invoiceItem.Total;
+                invoice.Summary.Total += invoiceItem.Total;
             }
 
             return Result<Invoice>.Success(invoice);
         }
+
+		public Result<string> SerializeInvoiceToXml(Invoice invoice, string filePath)
+		{
+			try
+			{
+				var xmlSerializer = new XmlSerializer(typeof(Invoice));
+				using (var writer = new StreamWriter(filePath))
+				{
+					xmlSerializer.Serialize(writer, invoice);
+				}
+				var fileName = Path.GetFileName(filePath);
+				return Result<string>.Success(fileName);
+			}
+			catch (Exception ex)
+			{
+				return Result<string>.Failure(Errors.SerializeError(ex.Message));
+			}
+		}
 
 		private Result<T> Deserialize<T>(string xml)
 		{

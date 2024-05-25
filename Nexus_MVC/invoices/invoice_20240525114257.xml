@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<faktura xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" data_wystawienia="2024-05-25 11:42:57">
+  <wystawiajacy>
+    <nazwa>Magazyn centralny</nazwa>
+    <adres>ul. Słoneczna 50, 00-000 Warszawa</adres>
+  </wystawiajacy>
+  <zamawiajacy>
+    <nazwa>Apteka Zdrowie</nazwa>
+    <adres>Piotrowo 88, 61-138 Poznań</adres>
+  </zamawiajacy>
+  <pozycja lp="1" id="17" nazwa="Apap" cena_netto="20" sztuk="10" cena_brutto="24.60" razem="246.00" />
+  <pozycja lp="2" id="21" nazwa="Ibum" cena_netto="30" sztuk="2" cena_brutto="31.50" razem="63.00" />
+  <podsumowanie razem="309.00" />
+</faktura>

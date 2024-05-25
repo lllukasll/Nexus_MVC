@@ -225,7 +225,7 @@
 				<td></td>
 				<td></td>
 				<td>
-					Total: $@Model.Podsumowanie.ToString("0.##")
+					Total: $@Model.Summary.Total.ToString("0.##")
 				</td>
 			</tr>
 		</table>
@@ -235,6 +235,12 @@
 		<a asp-area="" asp-controller="Home" asp-action="Index">
 			<button class="button-24" role="button">Wygeneruj kolejną fakturę</button>
 		</a>
+		@if (ViewBag.XmlFileName != null)
+		{
+			<a asp-controller="Home" asp-action="DownloadInvoice" asp-route-fileName="@ViewBag.XmlFileName">
+				<button class="button-24" role="button">Download Invoice XML</button>
+			</a>
+		}
 	</div>
 	
 

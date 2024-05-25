@@ -25,5 +25,9 @@
 
         public static string ProcessingError(string message)
             { return $"An error occurred while processing the files: {message}";  }
-    }
+
+        public static string SerializeError(string message)
+            { return $"An error occurred while trying to generate invoice.xml: {message}"; }
+
+	}
 }
